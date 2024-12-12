@@ -10,6 +10,32 @@
     text-align: center;
 }
 
+.venta {
+    margin: 0 300px 0 300px;
+    display: flex;
+    flex-wrap:wrap;
+    /*border: solid black 1px;*/
+}
+
+.alquiler {
+    margin: 0 300px 0 300px;
+    display: flex;
+    flex-wrap:wrap;
+    /*border: solid black 1px;*/
+}
+
+.anuncio {
+    margin: 0 10px 0 10px;
+    border: solid black 1px;
+    width: 25%;
+    height: 50%;
+    border-radius: 10px;
+}
+
+.info {
+    margin: 10px;
+}
+
 .card {
     height: 100px;
 }

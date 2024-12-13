@@ -1,12 +1,6 @@
-const ventas = document.getElementById("venta");
-const alquileres = document.getElementById("alquiler")
+const propiedad = document.getElementById("contenido");
 
-
-let venta = ""
-let alquiler = ""
-let fumar = ""
-let mascota = ""
-
+let contenido = ""
 
 // Ventas
 
@@ -49,55 +43,6 @@ const propiedades_ventas = [
 ]
 
 
-
-for (let producto of propiedades_ventas)
-    {
-        if(producto.smoke == false)
-            {
-                fumar = '<p class="text-danger"> <i class="fas fa-smoking-ban"></i> No se permite fumar </p>'
-            }
-            else if(producto.smoke == true)
-                {
-                    fumar = '<p class="text-success"> <i class="fas fa-smoking"></i> Permitido fumar </p>'
-                }
-        
-        if(producto.pets == false)
-            {
-                mascota = '<p class="text-danger"> <i class="fa-solid fa-ban"></i> No se permiten mascotas </p>'
-            }
-            else if(producto.pets == true)
-                {
-                    mascota = '<p class="text-success"> <i class="fas fa-paw"></i> Mascotas permitidas </p>'
-                }
-
-        venta += `
-        <div class="anuncio">
-            <div class="card">
-            <img src="${producto.src}" alt="Imagen de la propiedad" class="card-img-top"/>
-            </div>
-
-            <div class="info">
-                <h5 class="card-title"> ${producto.nombre} </h5>
-                <p class="card-text">${producto.descripcion} </p>
-                <p> <i class="fas fa-map-marker-alt"></i> ${producto.ubicacion} </p>
-                  <i class="fas fa-bed"></i> ${producto.habitaciones} |
-                  <i class="fas fa-bath"></i> ${producto.baños}
-                </p> 
-                <p><i class="fas fa-dollar-sign"></i> ${producto.costo}</p>
-                ${fumar} 
-                ${mascota}                     
-            </div>
-        </div>
-        `;
-        
-    }
-if(venta.innerHTML == true)
-    {
-        ventas.innerHTML = venta 
-    }
-else {venta.innerHTML = ""}
-
-
 // Alquiler
 
 const propiedades_alquiler = [
@@ -138,54 +83,56 @@ const propiedades_alquiler = [
     }
 ]
 
-for (let producto of propiedades_alquiler)
-    {
-        if(producto.smoke == false)
-            {
-                fumar = '<p class="text-danger"> <i class="fas fa-smoking-ban"></i> No se permite fumar </p>'
-            }
-            else if(producto.smoke == true)
-                {
-                    fumar = '<p class="text-success"> <i class="fas fa-smoking"></i> Permitido fumar </p>'
-                }
-        
-        if(producto.pets == false)
-            {
-                mascota = '<p class="text-danger"> <i class="fa-solid fa-ban"></i> No se permiten mascotas </p>'
-            }
-            else if(producto.pets == true)
-                {
-                    mascota = '<p class="text-success"> <i class="fas fa-paw"></i> Mascotas permitidas </p>'
-                }
+function mostrarPropiedades(arrayPropiedades, contenedorId) {
+    
+    for (let producto of arrayPropiedades) {
+        let fumar = producto.smoke 
+            ? '<p class="text-success"> <i class="fas fa-smoking"></i> Permitido fumar </p>' 
+            : '<p class="text-danger"> <i class="fas fa-smoking-ban"></i> No se permite fumar </p>';
 
-        alquiler += `
+        let mascota = producto.pets 
+            ? '<p class="text-success"> <i class="fas fa-paw"></i> Mascotas permitidas </p>' 
+            : '<p class="text-danger"> <i class="fa-solid fa-ban"></i> No se permiten mascotas </p>';
+
+        contenido += `
         <div class="anuncio">
             <div class="card">
-            <img src="${producto.src}" alt="Imagen de la propiedad" class="card-img-top"/>
+                <img src="${producto.src}" alt="Imagen de la propiedad" class="card-img-top"/>
             </div>
-
             <div class="info">
                 <h5 class="card-title"> ${producto.nombre} </h5>
-                <p class="card-text">${producto.descripcion} </p>
-                <p> <i class="fas fa-map-marker-alt"></i> ${producto.ubicacion} </p>
-                  <i class="fas fa-bed"></i> ${producto.habitaciones} |
-                  <i class="fas fa-bath"></i> ${producto.baños}
-                </p> 
+                <p class="card-text">${producto.descripcion}</p>
+                <p><i class="fas fa-map-marker-alt"></i> ${producto.ubicacion}</p>
+                <p>
+                    <i class="fas fa-bed"></i> ${producto.habitaciones} |
+                    <i class="fas fa-bath"></i> ${producto.baños}
+                </p>
                 <p><i class="fas fa-dollar-sign"></i> ${producto.costo}</p>
                 ${fumar} 
                 ${mascota}                     
             </div>
-        </div>
-        `
+        </div>`;
     }
 
-    if(alquileres.innerHTML == true)
-        {
-            alquileres.innerHTML = alquiler
-        }
-        else {
-            alquileres.innerHTML = ""
-            }
-    
+    // Insertar contenido en el contenedor correspondiente
+    if (contenedorId) {
+        document.getElementById(contenedorId).innerHTML = contenido;
+    }
+}
+
+// Identificar el tipo de página según el ID del <body>
+const bodyId = document.body.id;
+
+if (bodyId === 'pagina-principal') {
+    // Mostrar tanto ventas como alquileres
+    mostrarPropiedades(propiedades_ventas, 'ventas');
+    mostrarPropiedades(propiedades_alquiler, 'alquileres');
+} else if (bodyId === 'pagina-ventas') {
+    // Mostrar solo ventas
+    mostrarPropiedades(propiedades_ventas, 'ventas');
+} else if (bodyId === 'pagina-alquileres') {
+    // Mostrar solo alquileres
+    mostrarPropiedades(propiedades_alquiler, 'alquileres');
+}
 
 

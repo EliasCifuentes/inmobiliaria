@@ -153,7 +153,7 @@ let seleccion = document.body.id // Selecciona la ID contenida en el Body
 
 if( seleccion === "pagina-principal")
     {
-        mostrarPropiedades(propiedades_ventas.slice(0,3), 'contenedor-ventas'); // Muestra solo los array del 0 al 3
+        mostrarPropiedades(propiedades_ventas.slice(0,3), 'contenedor-ventas'); // Muestra solo los array del 0 hasta el elemento 3 sin incluir la 
         mostrarPropiedades (propiedades_alquiler.slice(0,3), 'contenedor-alquileres')
     }
     else if (seleccion === "pagina-ventas")

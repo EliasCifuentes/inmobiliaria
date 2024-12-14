@@ -1,13 +1,3 @@
-const ventas = document.getElementById("venta");
-const alquileres = document.getElementById("alquiler")
-
-
-let venta = ""
-let alquiler = ""
-let fumar = ""
-let mascota = ""
-
-
 // Ventas
 
 const propiedades_ventas = [
@@ -44,58 +34,22 @@ const propiedades_ventas = [
         baños: 3,
         costo: "4.500",
         smoke: false,
-        pets: true
+        pets: true,
     }
+    ,
+    {
+        src: 'assets/img/comprar-casas-nos-estados-unidos-otimo-investimento.jpg',
+        nombre: 'Casa ampliada cerca de disney',
+        descripcion: 'casas amplias, desde 5 recámaras, con atractivos precios de primera lista (precios planos). Todas las residencias cuentan con alberca privada',
+        ubicacion: '436 WINDSOR CAY RESORT',
+        habitaciones: 5,
+        baños: 5,
+        costo: "7.500",
+        smoke: false,
+        pets: false,
+    }
+
 ]
-
-
-
-for (let producto of propiedades_ventas)
-    {
-        if(producto.smoke == false)
-            {
-                fumar = '<p class="text-danger"> <i class="fas fa-smoking-ban"></i> No se permite fumar </p>'
-            }
-            else if(producto.smoke == true)
-                {
-                    fumar = '<p class="text-success"> <i class="fas fa-smoking"></i> Permitido fumar </p>'
-                }
-        
-        if(producto.pets == false)
-            {
-                mascota = '<p class="text-danger"> <i class="fa-solid fa-ban"></i> No se permiten mascotas </p>'
-            }
-            else if(producto.pets == true)
-                {
-                    mascota = '<p class="text-success"> <i class="fas fa-paw"></i> Mascotas permitidas </p>'
-                }
-
-        venta += `
-        <div class="anuncio">
-            <div class="card">
-            <img src="${producto.src}" alt="Imagen de la propiedad" class="card-img-top"/>
-            </div>
-
-            <div class="info">
-                <h5 class="card-title"> ${producto.nombre} </h5>
-                <p class="card-text">${producto.descripcion} </p>
-                <p> <i class="fas fa-map-marker-alt"></i> ${producto.ubicacion} </p>
-                  <i class="fas fa-bed"></i> ${producto.habitaciones} |
-                  <i class="fas fa-bath"></i> ${producto.baños}
-                </p> 
-                <p><i class="fas fa-dollar-sign"></i> ${producto.costo}</p>
-                ${fumar} 
-                ${mascota}                     
-            </div>
-        </div>
-        `;
-        
-    }
-if(venta.innerHTML == true)
-    {
-        ventas.innerHTML = venta 
-    }
-else {venta.innerHTML = ""}
 
 
 // Alquiler
@@ -134,58 +88,84 @@ const propiedades_alquiler = [
         baños: 2,
         costo:"2.200",
         smoke: false,
+        pets: false,
+    }
+,
+    {
+        src: 'assets/img/rl-131479515__0__300.jpg',
+        nombre: 'Storey Lake – Casas en venta',
+        descripcion: 'Además de casas adosadas (adosadas), también ofrece unidades residenciales (viviendas unifamiliares). El condominio ofrece casas en venta en Orlando de 4, 5 y 6 recámaras.',
+        ubicacion: ' 293 New Street, Orlando',
+        habitaciones: 2,
+        baños: 2,
+        costo:"2.300",
+        smoke: true,
         pets: false
     }
 ]
 
-for (let producto of propiedades_alquiler)
-    {
-        if(producto.smoke == false)
-            {
-                fumar = '<p class="text-danger"> <i class="fas fa-smoking-ban"></i> No se permite fumar </p>'
-            }
-            else if(producto.smoke == true)
-                {
-                    fumar = '<p class="text-success"> <i class="fas fa-smoking"></i> Permitido fumar </p>'
-                }
-        
-        if(producto.pets == false)
-            {
-                mascota = '<p class="text-danger"> <i class="fa-solid fa-ban"></i> No se permiten mascotas </p>'
-            }
-            else if(producto.pets == true)
-                {
-                    mascota = '<p class="text-success"> <i class="fas fa-paw"></i> Mascotas permitidas </p>'
-                }
+// Logica
 
-        alquiler += `
+function mostrarPropiedades(arrayPropiedades, contenedorId) { // Funcion que recibira un array y un ID
+
+    let contenido = "" 
+    
+    for (let contenidos of arrayPropiedades) {
+        
+        
+        let fumar = contenidos.smoke 
+            ? '<p class="text-success"> <i class="fas fa-smoking"></i> Permitido fumar </p>' 
+            : '<p class="text-danger"> <i class="fas fa-smoking-ban"></i> No se permite fumar </p>';
+
+        let mascota = contenidos.pets 
+            ? '<p class="text-success"> <i class="fas fa-paw"></i> Mascotas permitidas </p>' 
+            : '<p class="text-danger"> <i class="fa-solid fa-ban"></i> No se permiten mascotas </p>';
+
+        contenido += `
         <div class="anuncio">
             <div class="card">
-            <img src="${producto.src}" alt="Imagen de la propiedad" class="card-img-top"/>
+                <img src="${contenidos.src}" alt="Imagen de la propiedad" class="card-img-top"/>
             </div>
-
             <div class="info">
-                <h5 class="card-title"> ${producto.nombre} </h5>
-                <p class="card-text">${producto.descripcion} </p>
-                <p> <i class="fas fa-map-marker-alt"></i> ${producto.ubicacion} </p>
-                  <i class="fas fa-bed"></i> ${producto.habitaciones} |
-                  <i class="fas fa-bath"></i> ${producto.baños}
-                </p> 
-                <p><i class="fas fa-dollar-sign"></i> ${producto.costo}</p>
+                <h5 class="card-title"> ${contenidos.nombre} </h5>
+                <p class="card-text">${contenidos.descripcion}</p>
+                <p><i class="fas fa-map-marker-alt"></i> ${contenidos.ubicacion}</p>
+                <p>
+                    <i class="fas fa-bed"></i> ${contenidos.habitaciones} |
+                    <i class="fas fa-bath"></i> ${contenidos.baños}
+                </p>
+                <p><i class="fas fa-dollar-sign"></i> ${contenidos.costo}</p>
                 ${fumar} 
                 ${mascota}                     
             </div>
-        </div>
-        `
+        </div>`;
     }
 
-    if(alquileres.innerHTML == true)
-        {
-            alquileres.innerHTML = alquiler
-        }
-        else {
-            alquileres.innerHTML = ""
-            }
-    
+    // Insertar contenido en el contenedor correspondiente
+let agregar = document.getElementById(contenedorId);
+if(agregar)
+    {
+        agregar.innerHTML = contenido
+    }   
+}
+
+let seleccion = document.body.id // Selecciona la ID contenida en el Body
+
+if( seleccion === "pagina-principal")
+    {
+        mostrarPropiedades(propiedades_ventas.slice(0,3), 'contenedor-ventas'); // Muestra solo los array del 0 al 3
+        mostrarPropiedades (propiedades_alquiler.slice(0,3), 'contenedor-alquileres')
+    }
+    else if (seleccion === "pagina-ventas")
+    {
+        mostrarPropiedades(propiedades_ventas,  'contenedor-ventas') 
+    }
+    else if(seleccion === "pagina-alquileres")
+    {
+        mostrarPropiedades(propiedades_alquiler, 'contenedor-alquileres'); 
+    }
+
+
+
 
 

@@ -10,18 +10,20 @@
     text-align: center;
 }
 
-.venta {
-    margin: 0 300px 0 300px;
+.ordenar {
     display: flex;
-    flex-wrap:wrap;
-    /*border: solid black 1px;*/
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    
 }
 
-.alquiler {
-    margin: 0 300px 0 300px;
+.mostrar {
+    margin: 0 100px 0 100px;
     display: flex;
     flex-wrap:wrap;
-    /*border: solid black 1px;*/
+    justify-content: center;
+    
 }
 
 .anuncio {
